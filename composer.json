@@ -29,6 +29,9 @@
             "Gloudemans\\Tests\\Shoppingcart\\": "tests/"
         }
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "suggest": {
         "gloudemans/notify": "Simple flash notifications for Laravel"
     },
