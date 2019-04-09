@@ -86,7 +86,7 @@ class Cart
      * @param array     $options
      * @return \Gloudemans\Shoppingcart\CartItem
      */
-    public function add($id, $name = null, $qty = null, $price = null, array $options = [])
+    public function add($id, $name = null, $subtitle = null, $qty = null, $price = null, $netPrice = null, $vatLabel = null, $urlImg = null, array $options = [])
     {
         if ($this->isMulti($id)) {
             return array_map(function ($item) {
@@ -94,7 +94,7 @@ class Cart
             }, $id);
         }
 
-        $cartItem = $this->createCartItem($id, $name, $qty, $price, $options);
+        $cartItem = $this->createCartItem($id, $name, $subtitle, $qty, $price, $netPrice, $vatLabel, $urlImg, $options);
 
         $content = $this->getContent();
 
@@ -437,17 +437,25 @@ class Cart
         return $content;
     }
 
-    /**
-     * Create a new CartItem from the supplied attributes.
-     *
-     * @param mixed     $id
-     * @param mixed     $name
-     * @param int|float $qty
-     * @param float     $price
-     * @param array     $options
-     * @return \Gloudemans\Shoppingcart\CartItem
-     */
-    private function createCartItem($id, $name, $qty, $price, array $options)
+
+	/**
+	 *
+	 * * Create a new CartItem from the supplied attributes.
+	 *
+	 *
+	 * @param $id
+	 * @param $name
+	 * @param $subtitle
+	 * @param $qty
+	 * @param $price
+	 * @param $netPrice
+	 * @param $vatLabel
+	 * @param $urlImg
+	 * @param array $options
+	 *
+	 * @return CartItem
+	 */
+	private function createCartItem($id, $name, $subtitle, $qty, $price, $netPrice, $vatLabel, $urlImg, array $options)
     {
         if ($id instanceof Buyable) {
             $cartItem = CartItem::fromBuyable($id, $qty ?: []);
@@ -457,7 +465,7 @@ class Cart
             $cartItem = CartItem::fromArray($id);
             $cartItem->setQuantity($id['qty']);
         } else {
-            $cartItem = CartItem::fromAttributes($id, $name, $price, $options);
+            $cartItem = CartItem::fromAttributes($id, $name,$subtitle, $price,$netPrice, $vatLabel, $urlImg, $options);
             $cartItem->setQuantity($qty);
         }
 
