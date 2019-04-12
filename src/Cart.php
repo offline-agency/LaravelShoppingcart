@@ -239,7 +239,7 @@ class Cart
         $content = $this->getContent();
 
         $total = $content->reduce(function ($total, CartItem $cartItem) {
-            return $total + ($cartItem->qty * $cartItem->priceTax);
+            return $total + ($cartItem->qty * $cartItem->totalPrice);
         }, 0);
 
         return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
@@ -258,7 +258,7 @@ class Cart
         $content = $this->getContent();
 
         $tax = $content->reduce(function ($tax, CartItem $cartItem) {
-            return $tax + ($cartItem->qty * $cartItem->tax);
+            return $tax + ($cartItem->qty * $cartItem->vat);
         }, 0);
 
         return $this->numberFormat($tax, $decimals, $decimalPoint, $thousandSeperator);
@@ -421,6 +421,10 @@ class Cart
         }
 
         return null;
+    }
+
+    public function totalVatLabel(){
+    	return $this->tax() > 0 ? "Iva Inclusa" : "Esente Iva";
     }
 
     /**

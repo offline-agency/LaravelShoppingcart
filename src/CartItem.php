@@ -50,11 +50,18 @@ class CartItem implements Arrayable, Jsonable {
 	public $price;
 
 	/**
-	 * The price without discount of the cart item.
+	 * The price with discount of the cart item.
 	 *
 	 * @var float
 	 */
-	public $netPrice;
+	public $totalPrice;
+
+	/**
+	 * The price with discount of the cart item.
+	 *
+	 * @var float
+	 */
+	public $vat;
 
 	/**
 	 * The vat label of the cart item
@@ -99,7 +106,7 @@ class CartItem implements Arrayable, Jsonable {
 	 * @param float $price
 	 * @param array $options
 	 */
-	public function __construct( $id, $name, $subtitle, $price, $netPrice, $vatLabel, $urlImg, array $options = [] ) {
+	public function __construct( $id, $name, $subtitle, $price, $totalPrice, $vat, $vatLabel, $urlImg, array $options = [] ) {
 		if ( empty( $id ) ) {
 			throw new \InvalidArgumentException( 'Please supply a valid identifier.' );
 		}
@@ -114,7 +121,8 @@ class CartItem implements Arrayable, Jsonable {
 		$this->name     = $name;
 		$this->subtitle = $subtitle;
 		$this->price    = floatval( $price );
-		$this->netPrice = floatval( $netPrice );
+		$this->totalPrice = floatval( $totalPrice );
+		$this->vat = floatval( $vat );
 		$this->vatLabel = $vatLabel;
 		$this->urlImg   = $urlImg;
 		$this->options  = new CartItemOptions( $options );
