@@ -106,7 +106,7 @@ class CartItem implements Arrayable, Jsonable {
 	 * @param float $price
 	 * @param array $options
 	 */
-	public function __construct( $id, $name, $subtitle, $price, $totalPrice, $vat, $urlImg, array $options = [] ) {
+	public function __construct( $id, $name,$subtitle, $price, $totalPrice, $vat, $urlImg, array $options = [] ) {
 		if ( empty( $id ) ) {
 			throw new \InvalidArgumentException( 'Please supply a valid identifier.' );
 		}
@@ -359,8 +359,8 @@ class CartItem implements Arrayable, Jsonable {
 	 *
 	 * @return CartItem
 	 */
-	public static function fromAttributes( $id, $name, $subtitle, $price, $netPrice, $urlImg, array $options = [] ) {
-		return new self( $id, $name, $subtitle, $price, $netPrice, $urlImg, $options );
+	public static function fromAttributes( $id, $name,$subtitle, $price, $totalPrice, $vat, $urlImg, array $options = [] ) {
+		return new self($id, $name,$subtitle, $price, $totalPrice, $vat, $urlImg, $options );
 	}
 
 	/**
