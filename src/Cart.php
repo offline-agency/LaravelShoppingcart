@@ -469,7 +469,7 @@ class Cart
             $cartItem = CartItem::fromArray($id);
             $cartItem->setQuantity($id['qty']);
         } else {
-            $cartItem = CartItem::fromAttributes($id, $name,$subtitle, $price,$totalPrice, $vat, $urlImg, $options);
+            $cartItem = CartItem::fromAttributes($id, $name,$subtitle, $price, $totalPrice, $vat, $urlImg, $options);
             $cartItem->setQuantity($qty);
         }
 
