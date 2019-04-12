@@ -86,7 +86,7 @@ class Cart
      * @param array     $options
      * @return \Gloudemans\Shoppingcart\CartItem
      */
-    public function add($id, $name = null, $subtitle = null, $qty = null, $price = null, $netPrice = null, $urlImg = null, array $options = [])
+    public function add($id, $name = null, $subtitle = null, $qty = null, $price = null, $totalPrice = null, $vat = null, $urlImg = null, array $options = [])
     {
         if ($this->isMulti($id)) {
             return array_map(function ($item) {
@@ -94,7 +94,7 @@ class Cart
             }, $id);
         }
 
-        $cartItem = $this->createCartItem($id, $name, $subtitle, $qty, $price, $netPrice, $urlImg, $options);
+        $cartItem = $this->createCartItem($id, $name, $subtitle, $qty, $price, $totalPrice, $vat, $urlImg, $options);
 
         $content = $this->getContent();
 
@@ -459,7 +459,7 @@ class Cart
 	 *
 	 * @return CartItem
 	 */
-	private function createCartItem($id, $name, $subtitle, $qty, $price, $netPrice, $urlImg, array $options)
+	private function createCartItem($id, $name, $subtitle, $qty, $price, $totalPrice, $vat, $urlImg, array $options)
     {
         if ($id instanceof Buyable) {
             $cartItem = CartItem::fromBuyable($id, $qty ?: []);
@@ -469,7 +469,7 @@ class Cart
             $cartItem = CartItem::fromArray($id);
             $cartItem->setQuantity($id['qty']);
         } else {
-            $cartItem = CartItem::fromAttributes($id, $name,$subtitle, $price,$netPrice, $urlImg, $options);
+            $cartItem = CartItem::fromAttributes($id, $name,$subtitle, $price,$totalPrice, $vat, $urlImg, $options);
             $cartItem->setQuantity($qty);
         }
 
