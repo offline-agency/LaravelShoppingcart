@@ -123,7 +123,7 @@ class CartItem implements Arrayable, Jsonable {
 		$this->price    = floatval( $price );
 		$this->totalPrice = floatval( $totalPrice );
 		$this->vat = floatval( $vat );
-		$this->vatLabel = $vatLabel;
+		$this->vatLabel = $this->vat  > 0 ? "Iva Inclusa" : "Esente Iva";
 		$this->urlImg   = $urlImg;
 		$this->options  = new CartItemOptions( $options );
 		$this->rowId    = $this->generateRowId( $id, $options );
