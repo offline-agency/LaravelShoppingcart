@@ -232,7 +232,7 @@ class Cart
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeperator
-     * @return string
+     * @return float
      */
     public function total($decimals = null, $decimalPoint = null, $thousandSeperator = null)
     {
@@ -242,7 +242,7 @@ class Cart
             return $total + ($cartItem->qty * $cartItem->totalPrice);
         }, 0);
 
-        return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeperator);
+        return $total;
     }
 
     /**
@@ -261,7 +261,7 @@ class Cart
             return $tax + ($cartItem->qty * $cartItem->vat);
         }, 0);
 
-        return $this->numberFormat($tax, $decimals, $decimalPoint, $thousandSeperator);
+        return $tax;
     }
 
     /**
@@ -280,7 +280,7 @@ class Cart
             return $subTotal + ($cartItem->qty * $cartItem->price);
         }, 0);
 
-        return $this->numberFormat($subTotal, $decimals, $decimalPoint, $thousandSeperator);
+        return $subTotal;
     }
 
     /**

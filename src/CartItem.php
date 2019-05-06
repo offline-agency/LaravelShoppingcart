@@ -50,7 +50,7 @@ class CartItem implements Arrayable, Jsonable {
 	public $price;
 
 	/**
-	 * The price with discount of the cart item.
+	 * The price with TAX of the cart item.
 	 *
 	 * @var float
 	 */
@@ -122,7 +122,7 @@ class CartItem implements Arrayable, Jsonable {
 		$this->subtitle = $subtitle;
 		$this->price    = floatval( $price );
 		$this->totalPrice = floatval( $totalPrice );
-		$this->vat = floatval( $vat );
+		$this->vat        =        floatval( $vat );
 		$this->vatLabel = $this->vat  > 0 ? "Iva Inclusa" : "Esente Iva";
 		$this->urlImg   = $urlImg;
 		$this->options  = new CartItemOptions( $options );
@@ -177,7 +177,7 @@ class CartItem implements Arrayable, Jsonable {
 	 * @param string $decimalPoint
 	 * @param string $thousandSeperator
 	 *
-	 * @return string
+	 * @return float
 	 */
 	public function total( $decimals = null, $decimalPoint = null, $thousandSeperator = null ) {
 		return $this->numberFormat( $this->total, $decimals, $decimalPoint, $thousandSeperator );
@@ -203,10 +203,10 @@ class CartItem implements Arrayable, Jsonable {
 	 * @param string $decimalPoint
 	 * @param string $thousandSeperator
 	 *
-	 * @return string
+	 * @return float
 	 */
 	public function taxTotal( $decimals = null, $decimalPoint = null, $thousandSeperator = null ) {
-		return $this->numberFormat( $this->taxTotal, $decimals, $decimalPoint, $thousandSeperator );
+		return $this->taxTotal;
 	}
 
 	/**
